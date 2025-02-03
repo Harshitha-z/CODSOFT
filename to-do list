@@ -1,68 +1,74 @@
 import tkinter as tk
-from tkinter import messagebox  
+from tkinter import messagebox  # For showing pop-up messages
 
 class ToDoListApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("To-Do List Application")
-        self.root.geometry("400x500")
+        self.root.title("To-Do List Application")  # Set the window title
+        self.root.geometry("400x500")  # Set the window size
 
-        self.tasks = []
+        self.tasks = []  # List to store tasks
 
+        # Entry widget to input new tasks
         self.task_input = tk.Entry(root, width=40)
         self.task_input.pack(pady=10)
 
+        # Button to add a new task
         self.add_button = tk.Button(root, text="Add Task", command=self.add_task)
         self.add_button.pack(pady=5)
 
+        # Listbox to display tasks
         self.tasks_listbox = tk.Listbox(root, width=50, height=15)
         self.tasks_listbox.pack(pady=10)
 
+        # Button to update a selected task
         self.update_button = tk.Button(root, text="Update Task", command=self.update_task)
         self.update_button.pack(pady=5)
 
+        # Button to delete a selected task
         self.delete_button = tk.Button(root, text="Delete Task", command=self.delete_task)
         self.delete_button.pack(pady=5)
 
+        # Button to clear all tasks
         self.clear_button = tk.Button(root, text="Clear All Tasks", command=self.clear_tasks)
         self.clear_button.pack(pady=5)
 
     def add_task(self):
-        task = self.task_input.get()
+        task = self.task_input.get()  # Get the text from the input field
         if task:
-            self.tasks.append(task)
-            self.tasks_listbox.insert(tk.END, task)
-            self.task_input.delete(0, tk.END)
+            self.tasks.append(task)  # Add task to the internal list
+            self.tasks_listbox.insert(tk.END, task)  # Display the task in the listbox
+            self.task_input.delete(0, tk.END)  # Clear the input field
         else:
-            messagebox.showwarning("Warning", "You must enter a task!")
+            messagebox.showwarning("Warning", "You must enter a task!")  # Show warning if input is empty
 
     def update_task(self):
-        selected_task_index = self.tasks_listbox.curselection()
+        selected_task_index = self.tasks_listbox.curselection()  # Get index of the selected task
         if selected_task_index:
-            updated_task = self.task_input.get()
+            updated_task = self.task_input.get()  # Get new task text from input
             if updated_task:
-                self.tasks[selected_task_index[0]] = updated_task
-                self.tasks_listbox.delete(selected_task_index)
-                self.tasks_listbox.insert(selected_task_index, updated_task)
-                self.task_input.delete(0, tk.END)
+                self.tasks[selected_task_index[0]] = updated_task  # Update the task in the internal list
+                self.tasks_listbox.delete(selected_task_index)  # Remove old task from the listbox
+                self.tasks_listbox.insert(selected_task_index, updated_task)  # Insert updated task
+                self.task_input.delete(0, tk.END)  # Clear the input field
             else:
-                messagebox.showwarning("Warning", "You must enter a new task!")
+                messagebox.showwarning("Warning", "You must enter a new task!")  # Warn if no new task is entered
         else:
-            messagebox.showwarning("Warning", "You must select a task to update!")
+            messagebox.showwarning("Warning", "You must select a task to update!")  # Warn if no task is selected
 
     def delete_task(self):
-        selected_task_index = self.tasks_listbox.curselection()
+        selected_task_index = self.tasks_listbox.curselection()  # Get index of the selected task
         if selected_task_index:
-            self.tasks.pop(selected_task_index[0])
-            self.tasks_listbox.delete(selected_task_index)
+            self.tasks.pop(selected_task_index[0])  # Remove the task from the internal list
+            self.tasks_listbox.delete(selected_task_index)  # Remove the task from the listbox
         else:
-            messagebox.showwarning("Warning", "You must select a task to delete!")
+            messagebox.showwarning("Warning", "You must select a task to delete!")  # Warn if no task is selected
 
     def clear_tasks(self):
-        self.tasks.clear()
-        self.tasks_listbox.delete(0, tk.END)
+        self.tasks.clear()  # Clear the internal task list
+        self.tasks_listbox.delete(0, tk.END)  # Clear all tasks from the listbox
 
 if __name__ == "__main__":
-    root = tk.Tk()
-    app = ToDoListApp(root)
-    root.mainloop()
+    root = tk.Tk()  # Create the main window
+    app = ToDoListApp(root)  # Initialize the ToDoListApp
+    root.mainloop()  # Run the application event loop
