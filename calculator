@@ -1,19 +1,24 @@
 def add(x, y):
+    # Function to add two numbers
     return x + y
 
 def subtract(x, y):
+    # Function to subtract the second number from the first
     return x - y
 
 def multiply(x, y):
+    # Function to multiply two numbers
     return x * y
 
 def divide(x, y):
+    # Function to divide the first number by the second
     if y != 0:
         return x / y
     else:
-        return "Error! Division by zero."
+        return "Error! Division by zero."  # Error message if division by zero is attempted
 
 def calculator():
+    # Main function to run the calculator
     print("Simple Calculator")
     print("Select operation:")
     print("1. Add")
@@ -22,10 +27,12 @@ def calculator():
     print("4. Divide")
 
     try:
+        # Take user input for the operation and numbers
         choice = input("Enter choice (1/2/3/4): ")
         num1 = float(input("Enter first number: "))
         num2 = float(input("Enter second number: "))
 
+        # Perform the selected operation
         if choice == '1':
             print(f"The result is: {add(num1, num2)}")
         elif choice == '2':
@@ -37,7 +44,9 @@ def calculator():
         else:
             print("Invalid input. Please enter a number between 1 and 4.")
     except ValueError:
+        # Handle non-numeric input errors
         print("Invalid input. Please enter numeric values.")
 
 if __name__ == "__main__":
+    # Ensure the calculator runs when the script is executed directly
     calculator()
